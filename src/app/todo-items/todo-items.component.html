@@ -1,0 +1,23 @@
+<h4 class="component-title">Todo Items</h4>
+
+<p class="sub-para todo-info">Todo List &nbsp;&nbsp; : {{getListId(0)}}</p>
+<p class="sub-para todo-listinfo">Todo Items : {{todoItems.length}} Items</p>
+
+<div class="container" style="padding-left: 0;">
+  <div class="row">
+    <div class="col-sm-9 my-3 pe-0">
+      <input type="text" id="taskNameTextField"  #taskNameTextField class="form-control" (keydown.enter)="onEnterKeyDown()"
+             placeholder="Input task name then tap Enter to add">
+    </div>
+  </div>
+</div>
+<section class="container legend">
+  <div class="row " *ngFor="let todoItem of todoItems; let i = index">
+    <div class="col-sm-9 py-1 my-1 clickable">
+      <input [checked]="todoItem.done" (click)=onDone(todoItem.itemId) class="form-check-input" type="checkbox"/>
+      &nbsp;<span [ngStyle]="{'text-decoration': (todoItem.done) ? 'line-through' : 'none'}"> {{todoItem.taskName}}</span>
+      <span (click)=onDelete(todoItem.itemId) class="cmd-buttons"><i class="fa fa-trash"></i></span>
+      <span (click)=onEdit(i) class="cmd-buttons"><i class="fa fa-edit"></i></span>
+    </div>
+  </div>
+</section>

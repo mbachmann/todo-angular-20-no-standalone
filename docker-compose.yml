@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  todo-angular:
+    image: uportal/todo-angular:latest
+
+    restart: always
+    ports:
+      - 4000:80
+

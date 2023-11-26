@@ -1,0 +1,194 @@
+openapi: 3.0.1
+info:
+  title: API for Todo App
+  license:
+    name: Apache 2.0
+    url: http://springdoc.org
+  version: '@springdoc.version@'
+servers:
+  - url: https://todo-h2.united-portal.com
+paths:
+  /api/v1/state/{id}:
+    put:
+      tags:
+        - todo-item-controller
+      operationId: changeDoneState
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+  /api/v1/edit:
+    put:
+      tags:
+        - todo-item-controller
+      operationId: editTodoItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoItem'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+  /api/v1/new:
+    post:
+      tags:
+        - todo-item-controller
+      operationId: newTodoItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoItem'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+  /api/v1/listids:
+    get:
+      tags:
+        - todo-item-controller
+      operationId: getListIDs
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TodoItemListsDTO'
+  /api/v1/list:
+    get:
+      tags:
+        - todo-item-controller
+      operationId: getAllTodoItems
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TodoItemsDTO'
+  /api/v1/list/{listId}:
+    get:
+      tags:
+        - todo-item-controller
+      operationId: getItem
+      parameters:
+        - name: listId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TodoItem'
+  /api/v1/item/{itemId}:
+    get:
+      tags:
+        - todo-item-controller
+      operationId: getItem_1
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TodoItem'
+  /api/v1/delete/{id}:
+    delete:
+      tags:
+        - todo-item-controller
+      operationId: deleteTodoItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: boolean
+components:
+  schemas:
+    TodoItem:
+      required:
+        - taskName
+      type: object
+      properties:
+        itemId:
+          type: integer
+          format: int64
+        listId:
+          type: string
+          format: uuid
+        taskName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        done:
+          type: boolean
+    TodoItemListsDTO:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        todoItemList:
+          type: array
+          items:
+            type: string
+            format: uuid
+    TodoItemsDTO:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        listId:
+          type: string
+          format: uuid
+        todoItemList:
+          type: array
+          items:
+            $ref: '#/components/schemas/TodoItem'

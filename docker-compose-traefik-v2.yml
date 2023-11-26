@@ -1,0 +1,22 @@
+version: '2'
+
+
+networks:
+  proxy:
+    external: true
+
+services:
+
+  todo-angular:
+    image: uportal/todo-angular:latest
+    labels:
+      - traefik.http.routers.blog.rule=Host(`todo-angular.united-portal.com`)
+      - traefik.http.routers.blog.tls=true
+      - traefik.http.routers.blog.tls.certresolver=lets-encrypt
+      - traefik.port=8080
+    restart: always
+    ports:
+      - 4000:80
+    networks:
+      - proxy
+
