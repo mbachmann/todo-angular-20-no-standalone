@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoListsComponent } from './todo-lists.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TodoListsComponent', () => {
   let component: TodoListsComponent;
@@ -9,9 +10,10 @@ describe('TodoListsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ TodoListsComponent ]
-    })
+    declarations: [TodoListsComponent],
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
       .compileComponents();
   });
 

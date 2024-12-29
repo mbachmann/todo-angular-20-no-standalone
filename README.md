@@ -1,6 +1,6 @@
-# Todo Angular based on angular 17.x.x no standalone
+# Todo Angular based on angular 18.x.x no standalone
 
-[https://github.com/mbachmann/todo-angular-17-no-standalone.git](https://github.com/mbachmann/todo-angular-17-no-standalone.git)
+[https://github.com/mbachmann/todo-angular-18-no-standalone.git](https://github.com/mbachmann/todo-angular-18-no-standalone.git)
 
 ## Content
 
@@ -221,16 +221,18 @@ Add the generated **ApiModule** to the `app.module.ts`. The App Module will cont
 Please uncomment them later.
 
 ```typescript
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {AppComponent} from './app.component';
+import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {ApiModule, BASE_PATH} from "./openapi-gen";
-// import { TodoListsComponent } from './todo-lists/todo-lists.component';
-// import { TodoItemsComponent } from './todo-items/todo-items.component';
 import {environment} from "../environments/environment";
+// import {TodoItemsComponent} from './todo-items/todo-items.component';
+// import {TodoListsComponent} from "./todo-lists/todo-lists.component";
+// import {FormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -241,11 +243,12 @@ import {environment} from "../environments/environment";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    ApiModule
+    ApiModule,
+    RouterLink
   ],
   providers: [
-    { provide: BASE_PATH, useValue: environment.API_BASE_PATH }
+    {provide: BASE_PATH, useValue: environment.API_BASE_PATH},
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })
@@ -365,15 +368,16 @@ add to the `todo.service.spec.ts` file the typescript code:
 import {TestBed} from '@angular/core/testing';
 
 import {TodoService} from './todo.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TodoServiceService', () => {
   let service: TodoService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [TodoService],
+      imports: [],
+      providers: [TodoService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     })
     service = TestBed.inject(TodoService);
   });
@@ -382,6 +386,7 @@ describe('TodoServiceService', () => {
     expect(service).toBeTruthy();
   });
 });
+
 
 ```
 
@@ -475,7 +480,8 @@ Add to the `todo-lists.component.spec.ts` file the typescript code:
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoListsComponent } from './todo-lists.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TodoListsComponent', () => {
   let component: TodoListsComponent;
@@ -483,10 +489,11 @@ describe('TodoListsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [ TodoListsComponent ]
+      declarations: [TodoListsComponent],
+      imports: [],
+      providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -499,6 +506,7 @@ describe('TodoListsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
 
 ```
 
@@ -709,10 +717,11 @@ Add to the `todo-items.component.spec.ts` file the typescript code:
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoItemsComponent } from './todo-items.component';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
 import {of} from "rxjs";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TodoItemsComponent', () => {
   let component: TodoItemsComponent;
@@ -720,9 +729,9 @@ describe('TodoItemsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule,],
-      declarations: [ TodoItemsComponent ],
-      providers:[
+      declarations: [TodoItemsComponent],
+      imports: [RouterTestingModule],
+      providers: [
         {
           provide: ActivatedRoute,
           useValue: {
@@ -731,9 +740,11 @@ describe('TodoItemsComponent', () => {
             }),
           },
         },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -746,6 +757,7 @@ describe('TodoItemsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
 ```
 
 ## Define the Routings
@@ -874,7 +886,7 @@ Add to the `app.component.html` file the template code:
             Backend</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/mbachmann/todo-angular" target="_blank">Github Frontend</a>
+          <a class="nav-link" href="https://github.com/mbachmann/todo-angular-18-no-standalone" target="_blank">Github Frontend</a>
         </li>
       </ul>
     </div>

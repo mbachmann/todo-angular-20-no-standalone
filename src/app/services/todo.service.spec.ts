@@ -1,16 +1,17 @@
 import {TestBed} from '@angular/core/testing';
 
 import {TodoService} from './todo.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('TodoServiceService', () => {
   let service: TodoService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [TodoService],
-    })
+    imports: [],
+    providers: [TodoService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     service = TestBed.inject(TodoService);
   });
 
