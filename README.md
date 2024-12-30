@@ -1,6 +1,6 @@
 # Todo Angular based on angular 18.x.x no standalone
 
-[https://github.com/mbachmann/todo-angular-18-no-standalone.git](https://github.com/mbachmann/todo-angular-18-no-standalone.git)
+[https://github.com/mbachmann/todo-angular-19-no-standalone.git](https://github.com/mbachmann/todo-angular-19-no-standalone.git)
 
 ## Content
 
@@ -288,7 +288,7 @@ Please add below code into `angular.json` file:
 Please add below code into `styles.scss` file:
 
 ```scss
-@import 'bootstrap/scss/bootstrap';
+@use 'bootstrap/scss/bootstrap';
 ``` 
 
 
@@ -311,7 +311,7 @@ Please add below code into `angular.json` file:
 Please add below code into `styles.scss` file:
 
 ```scss
-@import 'font-awesome/css/font-awesome.css';
+@use 'font-awesome/css/font-awesome.css';
 $fa-font-path : '../node_modules/font-awesome/fonts';
 ``` 
 
@@ -420,7 +420,8 @@ import {TodoService} from "../services/todo.service";
 @Component({
   selector: 'app-todo-lists',
   templateUrl: './todo-lists.component.html',
-  styleUrls: ['./todo-lists.component.scss']
+  styleUrls: ['./todo-lists.component.scss'],
+  standalone: false
 })
 export class TodoListsComponent implements OnInit, OnDestroy  {
 
@@ -559,7 +560,8 @@ import {parseIsoDateStrToDate} from "../shared/utils";
 @Component({
   selector: 'app-todo-items',
   templateUrl: './todo-items.component.html',
-  styleUrls: ['./todo-items.component.scss']
+  styleUrls: ['./todo-items.component.scss'],
+  standalone: false
 })
 export class TodoItemsComponent implements OnInit {
 
@@ -849,7 +851,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
     title = 'todo-angular';
@@ -886,7 +889,7 @@ Add to the `app.component.html` file the template code:
             Backend</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/mbachmann/todo-angular-18-no-standalone" target="_blank">Github Frontend</a>
+          <a class="nav-link" href="https://github.com/mbachmann/todo-angular-19-no-standalone" target="_blank">Github Frontend</a>
         </li>
       </ul>
     </div>

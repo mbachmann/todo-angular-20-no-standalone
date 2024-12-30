@@ -6,9 +6,10 @@ import {parseIsoDateStrToDate} from "../shared/utils";
 
 
 @Component({
-  selector: 'app-todo-items',
-  templateUrl: './todo-items.component.html',
-  styleUrls: ['./todo-items.component.scss']
+    selector: 'app-todo-items',
+    templateUrl: './todo-items.component.html',
+    styleUrls: ['./todo-items.component.scss'],
+    standalone: false
 })
 export class TodoItemsComponent implements OnInit {
 

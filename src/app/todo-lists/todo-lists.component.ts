@@ -4,9 +4,10 @@ import {TodoItemControllerService, TodoItemListsDTO} from "../openapi-gen";
 import {TodoService} from "../services/todo.service";
 
 @Component({
-  selector: 'app-todo-lists',
-  templateUrl: './todo-lists.component.html',
-  styleUrls: ['./todo-lists.component.scss']
+    selector: 'app-todo-lists',
+    templateUrl: './todo-lists.component.html',
+    styleUrls: ['./todo-lists.component.scss'],
+    standalone: false
 })
 export class TodoListsComponent implements OnInit, OnDestroy  {
 
