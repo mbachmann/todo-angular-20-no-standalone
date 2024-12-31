@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TodoItemsComponent } from './todo-items.component';
-import { provideHttpClientTesting } from "@angular/common/http/testing";
+import {TodoItemsComponent} from './todo-items.component';
+import {provideHttpClientTesting} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ActivatedRoute} from "@angular/router";
 import {of} from "rxjs";
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('TodoItemsComponent', () => {
   let component: TodoItemsComponent;

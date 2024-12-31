@@ -1,6 +1,3 @@
-
-import {RouterLink, RouterOutlet} from '@angular/router';
-
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
 

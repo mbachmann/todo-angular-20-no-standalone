@@ -1,0 +1,31 @@
+<section class="container legend">
+  <div class="row mt-3">
+    <h4>Fahrenheit to Celsius </h4>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-sm-2">
+      <label for="fahrenheitToCelsius" class="col-form-label">Fahrenheit</label>
+    </div>
+    <div class="col-sm-3">
+      <input type="text" id="fahrenheitToCelsius" class="form-control"
+             [(ngModel)]="fahrenheit">
+    </div>
+    <div class="col-sm-5">
+      <span id="fahrenheitToCelsiusDisplay">Celsius : {{fahrenheit | tempConverter:'C'}} </span>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <h4>Celsius to Fahrenheit </h4>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-sm-2">
+      <label for="celsiusToFahrenheit" class="col-form-label">Celsius</label>
+    </div>
+    <div class="col-sm-3">
+      <input type="text" id="celsiusToFahrenheit" class="form-control" [(ngModel)]="celsius">
+    </div>
+    <div class="col-sm-5">
+      <span id="celsiusToFahrenheitDisplay">Fahrenheit : {{celsius | tempConverter:'F'}} </span>
+    </div>
+  </div>
+</section>

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TodoListsComponent } from './todo-lists.component';
-import { provideHttpClientTesting } from "@angular/common/http/testing";
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {TodoListsComponent} from './todo-lists.component';
+import {provideHttpClientTesting} from "@angular/common/http/testing";
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 describe('TodoListsComponent', () => {
   let component: TodoListsComponent;
