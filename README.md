@@ -1,6 +1,6 @@
-# Todo Angular based on angular 18.x.x no standalone
+# Todo Angular based on angular 20.x.x no standalone
 
-[https://github.com/mbachmann/todo-angular-19-no-standalone.git](https://github.com/mbachmann/todo-angular-19-no-standalone.git)
+[https://github.com/mbachmann/todo-angular-20-no-standalone.git](https://github.com/mbachmann/todo-angular-20-no-standalone.git)
 
 ## Content
 
@@ -31,7 +31,7 @@
 <br>
 
 ## Prerequisites
-Both the CLI and generated project have dependencies that require Node 14.7  or higher, together with NPM 6.14.13 or higher.
+Both the CLI and generated project have dependencies that require Node 20.19  or higher, together with NPM 6.14.13 or higher.
 
 The related Spring Boot Backend can be found here: [https://github.com/mbachmann/spring-boot-todo-app](https://github.com/mbachmann/spring-boot-todo-app)
 
@@ -54,6 +54,12 @@ Global package:
 
 ```sh
     npm install -g @angular/cli@latest
+```
+
+or
+
+```sh
+    npm install -g @angular/cli@20
 ```
 
 
