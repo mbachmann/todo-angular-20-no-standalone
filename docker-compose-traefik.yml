@@ -21,4 +21,5 @@ services:
       - 4000:80
     networks:
       - proxy
-
+    environment:
+      API_BASE_PATH: https://todo-h2.united-portal.com

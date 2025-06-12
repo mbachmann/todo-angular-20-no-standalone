@@ -1,0 +1,22 @@
+networks:
+  proxy:
+    external: true
+
+services:
+  todo-angular:
+    image: uportal/todo-angular:latest
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.todo-angular.rule=Host(`todo-angular.united-portal.com`)'
+      - 'traefik.http.routers.todo-angular.tls=true'
+      - 'traefik.http.routers.todo-angular.tls.certresolver=lets-encrypt'
+      - 'traefik.http.routers.todo-angular.entrypoints=websecure'
+      - 'traefik.http.services.todo-angular.loadbalancer.server.port=80'
+    restart: unless-stopped
+    ports:
+      - 4000:80
+    networks:
+      - proxy
+
+    environment:
+      API_BASE_PATH: https://todo-h2.united-portal.com

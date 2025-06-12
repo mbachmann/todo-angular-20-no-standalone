@@ -208,7 +208,7 @@ Add the url to the backend to the files `enviroments/enviroment.ts` and `envirom
 ```typescript
 export const environment = {
   production: true,
-  API_BASE_PATH: 'https://todo-h2.united-portal.com'
+  API_BASE_PATH: '_API_BASE_PATH_',
 };
 ```
 
