@@ -196,18 +196,19 @@ Add the `generate:api` command to the scripts section of `package.json`.
   "scripts": {
     ...
     ...
-    "generate:api": "openapi-generator-cli generate -g typescript-angular -i  src/app/openapi/api-docs.yaml -o src/app/openapi-gen"
+    "generate:api": "openapi-generator-cli generate -g typescript-angular -i  src/app/openapi/api-docs.yaml -o src/app/openapi-gen --additional-properties=ngVersion=20.0.3",
+    ...
   },
 ```
 
-Create a file _openapitools_.json and adjust the version to 5.3.0 of the generator:
+Create a file _openapitools_.json and adjust the version to 7.8.0 of the generator:
 
 ```json
 {
   "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "5.3.0"
+    "version": "7.8.0"
   }
 }
 ```
@@ -696,7 +697,7 @@ export class TodoItemsComponent implements OnInit {
   }
 
   refreshList(listId: string) {
-    this.subscription = this.todoItemControllerService.getItem(listId).subscribe(
+    this.subscription = this.todoItemControllerService.getItemsOfOneList(listId).subscribe(
       data => {
         this.todoItems = data;
         // @ts-ignore
