@@ -131,7 +131,7 @@ The angular.json file contains the configuration for the project. The file is cr
 In version 20 the behavior of the ng-cli has changed. The generator does not generate anymore a .component.ts or .service.ts file. 
 This is not the desired behavior for this tutorial, therefore we have to change the angular.json file.
 
-[https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301]{https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301}
+[https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301](https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301)
 
 Open the file `angular.json` and change the section `schematics` to the following code:
 
