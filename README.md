@@ -124,6 +124,60 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+## Update the angular.json file due to a changed behavior of the Angular CLI in version 20
+
+The angular.json file contains the configuration for the project. The file is created by the angular-cli when you create a new project.
+
+In version 20 the behavior of the ng-cli has changed. The generator does not generate anymore a .component.ts or .service.ts file. 
+This is not the desired behavior for this tutorial, therefore we have to change the angular.json file.
+
+[https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301]{https://blog.angular.dev/announcing-angular-v20-b5c9c06cf301}
+
+Open the file `angular.json` and change the section `schematics` to the following code:
+
+```json
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "todo-angular": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": false,
+          "type": "component"
+        },
+        "@schematics/angular:directive": {
+          "standalone": false,
+          "type": "directive"
+        },
+        "@schematics/angular:interceptor": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false,
+          "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:module": {
+          "typeSeparator": "."
+        },
+        "@schematics/angular:service": {
+          "type": "service"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src"
+      ... 
+      ...  
+    }
+  }
+}
+```
 
 
 ## Install the OpenApi Tools
