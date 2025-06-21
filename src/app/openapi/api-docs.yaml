@@ -6,153 +6,581 @@ info:
     url: http://springdoc.org
   version: '@springdoc.version@'
 servers:
-  - url: https://todo-h2.united-portal.com
+- url: https://todo-h2.united-portal.com
 paths:
-  /api/v1/state/{id}:
-    put:
+  /api/v1/todolist-names/{id}:
+    get:
       tags:
-        - todo-item-controller
-      operationId: changeDoneState
+      - todo-list-name-controller
+      operationId: getTodoListNameById
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TodoItem'
+                $ref: "#/components/schemas/TodoListNameDTO"
+    put:
+      tags:
+      - todo-list-name-controller
+      operationId: updateTodoListName
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TodoListName"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoListName"
+    delete:
+      tags:
+      - todo-list-name-controller
+      operationId: deleteTodoListName
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "200":
+          description: OK
+  /api/v1/state/{id}:
+    put:
+      tags:
+      - todo-item-controller
+      operationId: changeDoneState
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoItem"
   /api/v1/edit:
     put:
       tags:
-        - todo-item-controller
+      - todo-item-controller
       operationId: editTodoItem
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TodoItem'
+              $ref: "#/components/schemas/TodoItem"
         required: true
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TodoItem'
+                $ref: "#/components/schemas/TodoItem"
+  /api/v1/todolist-names:
+    get:
+      tags:
+      - todo-list-name-controller
+      operationId: getAllTodoListNames
+      responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TodoListNameDTO"
+    post:
+      tags:
+      - todo-list-name-controller
+      operationId: createTodoListName
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TodoListName"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TodoListName"
   /api/v1/new:
     post:
       tags:
-        - todo-item-controller
+      - todo-item-controller
       operationId: newTodoItem
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TodoItem'
+              $ref: "#/components/schemas/TodoItem"
         required: true
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TodoItem'
+                $ref: "#/components/schemas/TodoItem"
   /api/v1/listids:
     get:
       tags:
-        - todo-item-controller
+      - todo-item-controller
       operationId: getListIDs
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TodoItemListsDTO'
+                $ref: "#/components/schemas/TodoItemListsDTO"
   /api/v1/list:
     get:
       tags:
-        - todo-item-controller
+      - todo-item-controller
       operationId: getAllTodoItems
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TodoItemsDTO'
+                  $ref: "#/components/schemas/TodoItemsDTO"
   /api/v1/list/{listId}:
     get:
       tags:
-        - todo-item-controller
-      operationId: getItem
+      - todo-item-controller
+      operationId: getItemsOfOneList
       parameters:
-        - name: listId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: listId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TodoItem'
+                  $ref: "#/components/schemas/TodoItem"
   /api/v1/item/{itemId}:
     get:
       tags:
-        - todo-item-controller
-      operationId: getItem_1
+      - todo-item-controller
+      operationId: getItem
       parameters:
-        - name: itemId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/TodoItem'
+                $ref: "#/components/schemas/TodoItem"
   /api/v1/delete/{id}:
     delete:
       tags:
-        - todo-item-controller
+      - todo-item-controller
       operationId: deleteTodoItem
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "200":
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: boolean
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+        timestamp:
+          type: string
+          format: date-time
+    Problem:
+      type: object
+      properties:
+        logRef:
+          type: string
+        message:
+          type: string
+    TodoListName:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
     TodoItem:
       required:
-        - taskName
+      - taskName
       type: object
       properties:
         itemId:
@@ -168,6 +596,23 @@ components:
           format: date-time
         done:
           type: boolean
+    TodoListNameDTO:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        listId:
+          type: string
+          format: uuid
+        fromDate:
+          type: string
+          format: date-time
+        toDate:
+          type: string
+          format: date-time
+        listName:
+          type: string
     TodoItemListsDTO:
       type: object
       properties:
@@ -188,7 +633,15 @@ components:
         listId:
           type: string
           format: uuid
+        fromDate:
+          type: string
+          format: date-time
+        toDate:
+          type: string
+          format: date-time
+        listName:
+          type: string
         todoItemList:
           type: array
           items:
-            $ref: '#/components/schemas/TodoItem'
+            $ref: "#/components/schemas/TodoItem"

@@ -84,7 +84,7 @@ export class TodoItemsComponent implements OnInit {
   }
 
   refreshList(listId: string) {
-    this.subscription = this.todoItemControllerService.getItem(listId).subscribe(
+    this.subscription = this.todoItemControllerService.getItemsOfOneList(listId).subscribe(
       data => {
         this.todoItems = data;
         // @ts-ignore
